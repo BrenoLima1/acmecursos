@@ -13,12 +13,15 @@ class Funcionario implements RepositorioFuncionario{
 
     private $email;
 
-    public function __construct($nome, $cpf, $email)
+	private $senha;
+
+    public function __construct($nome, $cpf, $email, $senha)
     {
         if($this->validarCPF($cpf)){
             $this->setNome($nome);
             $this->setCpf($cpf);
             $this->setEmail($email);
+            $this->setSenha($senha);
         }
     }
 
@@ -79,6 +82,22 @@ class Funcionario implements RepositorioFuncionario{
     {
         return (is_numeric($cpf) && mb_strlen($cpf) == 11) ? true : false;
     }
+
+	/**
+	 * @return mixed
+	 */
+	public function getSenha() {
+		return $this->senha;
+	}
+
+	/**
+	 * @param mixed $senha
+	 * @return self
+	 */
+	public function setSenha($senha): self {
+		$this->senha = $senha;
+		return $this;
+	}
 }
 
 ?>

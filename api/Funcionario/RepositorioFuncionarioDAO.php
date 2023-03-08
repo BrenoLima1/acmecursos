@@ -10,8 +10,13 @@ interface RepositorioFuncionarioDAO{
      * @param Aluno $aluno
      * @return void
      */
-    public function cadastrarAlunos(Aluno $aluno);
+    public function cadastrarFuncionario(Funcionario $funcionario): bool;
 
+    public function removerFuncionario($id): bool;
+
+    public function listarFuncionarios(): array;
+
+    public function alterarAluno(Funcionario $funcionario, $id): bool;
 }
 
 ?>
