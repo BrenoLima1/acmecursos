@@ -17,6 +17,20 @@ class FuncionarioDAO implements RepositorioFuncionarioDAO{
         $this->pdo = $pdo;
     }
 
+     /**
+  * Summary of listarAlunos
+  * @throws FuncionarioException
+  * @return array
+  */
+	public function listarFuncionarios(): array {
+        try {
+            $ps = $this->pdo->query('SELECT * FROM funcionarios');
+            return $ps->fetchAll();
+        } catch (\PDOException $e) {
+            $this->pdo->rollBack();
+            throw new FuncionarioException('Falha ao listar funcionarios: ' . $e->getMessage());
+        }
+	}
 
  /**
   * Summary of cadastrarFuncionario
@@ -58,29 +72,13 @@ class FuncionarioDAO implements RepositorioFuncionarioDAO{
 	}
 
  /**
-  * Summary of listarAlunos
-  * @throws FuncionarioException
-  * @return array
-  */
-	public function listarFuncionarios(): array {
-        try {
-            $ps = $this->pdo->query('SELECT * FROM funcionarios');
-            return $ps->fetchAll();
-        } catch (\PDOException $e) {
-            $this->pdo->rollBack();
-            throw new FuncionarioException('Falha ao listar funcionarios: ' . $e->getMessage());
-        }
-	}
-
-
- /**
   * Summary of alterarAluno
   * @param Funcionario $funcionario
   * @param mixed $id
   * @throws FuncionarioException
   * @return bool
   */
-	public function alterarAluno(Funcionario $funcionario, $id): bool {
+	public function alterarFuncionario(Funcionario $funcionario, $id): bool {
         try {
             $this->pdo->beginTransaction();
             $ps = $this->pdo->prepare('UPDATE funcionarios(nome, cpf, email, senha) SET nome = ? , cpf = ? ,

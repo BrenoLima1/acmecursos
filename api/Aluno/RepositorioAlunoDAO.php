@@ -10,11 +10,11 @@ interface RepositorioAlunoDAO{
      * @param Aluno $aluno
      * @return void
      */
+    public function listarAlunos(): array;
+
     public function cadastrarAluno(Aluno $aluno): bool;
 
     public function removerAluno($id): bool;
-
-    public function listarAlunos(): array;
 
     public function alterarAluno(Aluno $aluno, $id): bool;
 }
