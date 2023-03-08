@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../src/cadastrar-aluno-curso.js" defer></script>
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>Cadastro De Aluno em Curso </title>
+  </head>
+  <body>
+
+    <header>
+      <nav>
+        <ul>
+            <li><a href="form-curso.html">|Cadastrar curso|</a></li>
+            <li><a href="form-aluno.html">|Cadastrar aluno|</a></li>
+            <li><a href="form-funcionario.html">|Cadastrar Funcionario|</a></li>
+            <li><a href="exibir-alunos.html">|Alunos|</a></li>
+            <li><a href="exibir-funcionarios.html">|Funcionários|</a></li>
+            <li><a href="exibir-cursos.html">|Cursos|</a></li>
+            <li><a href="index.html">|Início|</a></li>
+          <li><a href="">|Sair|</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <div id="divForm">
+        <h1> Cadastrar Aluno em Curso</h1>
+        <form action = "" method = "POST">
+          <hr />
+
+          <h3><label for="nome">Código do Curso</label></h3>
+          <input type="text" name="codigoCurso" id="codigoCurso" required />
+
+          <h3><label for="email">ID do Aluno</label></h3>
+          <input type="number" name="idAluno" id="idAluno" required />
+
+          <hr />
+
+          <input id="salvar" type="submit" value="Cadastrar" />
+          <input id="excluir" type="submit" value="Excluir" />
+        </form>
+      </div>
+    </main>
+    
+    <footer>
+      <p id="footerp">Copyright (c) Acme Ltda.</p>
+    </footer>
+
+  </body>
+</html>

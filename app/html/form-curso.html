@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../src/cadastrar-curso.js" defer></script>
+    <script src="../src/alterar-curso.js" defer></script>
+    <script src="../src/excluir-curso.js" defer></script>
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>Cadastrar Curso</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="form-aluno.html">|Cadastrar aluno|</a></li>
+          <li><a href="form-funcionario.html">|Cadastrar funcionário|</a></li>
+          <li><a href="form-aluno-curso.html">|Cadastrar Aluno em Curso|</a></li>
+          <li><a href="exibir-alunos.html">|Alunos|</a></li>
+          <li><a href="exibir-funcionarios.html">|Funcionários|</a></li>
+          <li><a href="exibir-cursos.html">|Cursos|</a></li>
+          <li><a href="index.html">|Início|</a></li>
+          <li><a href="">|Sair|</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div id="divForm">
+      <h1>Cadastrar curso</h1>
+      <hr id="hrCurso1" />
+      <form action="" method="post">
+        <p id="pCodigo"><label for="codigo">Código</label>
+        <input type="text" name="codigo" id="codigo" placeholder="Código" required /></p>
+        <p><label for="nome">Nome</label>
+        <input type="text" name="nome" id="nome" placeholder="Nome" required /></p>
+        <p><label for="dataInicio">Data de início</label>
+        <input type="date" name="dataInicio" id="dataInicio" required /></p>
+        <p><label for="dataTermino">Data de término</label>
+        <input type="date" name="dataTermino" id="dataTermino" required /></p>
+        <p><label for="horarioInicio">Horário de início</label>
+        <input type="time" name="horarioInicio" id="horarioInicio" required /></p>
+        <p><label for="horarioTermino">Horário de término</label>
+        <input type="time" name="horarioTermino" id="horarioTermino" required /></p>
+        <p><label for="numeroDeAulas">Número de aulas</label>
+        <input type="number" name="numeroDeAulas" id="numeroDeAulas" placeholder="Número de aulas" required /></p>
+        <label for="idFuncionario">ID do Funcionário Responsável</label>
+        <input type="number" name="idFuncionario" id="idFuncionario" placeholder="ID do Funcionário" required />
+        <hr />
+        <input type="submit" value="Cadastrar" />
+        <input id="alterar" type="submit" value="Salvar" />
+        <input id="excluir" type="submit" value="Excluir" />
+      </form>
+    </div>
+    <footer>
+      <p id="footerp">Copyright (c) Acme Ltda.</p>
+    </footer>
+  </body>
+</html>
