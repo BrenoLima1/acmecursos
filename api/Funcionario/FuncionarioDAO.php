@@ -17,6 +17,19 @@ class FuncionarioDAO implements RepositorioFuncionarioDAO{
         $this->pdo = $pdo;
     }
 
+    public function validarFuncionario(Funcionario $funcionario){
+        try {
+            $ps = $this->pdo->prepare('SELECT * FROM funcionarios WHERE cpf = ?');
+            $ps->execute([$funcionario->getCpf()]);
+            if($ps->fetch()){
+                return false;
+            }
+            return true;
+        } catch (\PDOException $e) {
+            throw new FuncionarioException('Falha ao listar funcionario: ' . $e->getMessage());
+        }
+    }
+
      /**
   * Summary of listarAlunos
   * @throws FuncionarioException
@@ -39,16 +52,19 @@ class FuncionarioDAO implements RepositorioFuncionarioDAO{
   * @return bool
   */
 	public function cadastrarFuncionario(Funcionario $funcionario): bool {
-        try {
-            $this->pdo->beginTransaction();
-            $ps = $this->pdo->prepare('INSERT INTO funcionarios(nome, cpf, email, senha) (?,?,?,?)');
-            $ps->execute([$funcionario->getNome(), $funcionario->getCpf(), $funcionario->getEmail(), $funcionario->getSenha()]);
-            $this->pdo->commit();
-            return true;
-        } catch (\PDOException $e) {
-            $this->pdo->rollBack();
-            throw new FuncionarioException('Falha ao cadastrar funcionario: ' . $e->getMessage());
+        if($this->validarFuncionario($funcionario)){
+            try {
+                $this->pdo->beginTransaction();
+                $ps = $this->pdo->prepare('INSERT INTO funcionarios(nome, cpf, email, senha) (?,?,?,?)');
+                $ps->execute([$funcionario->getNome(), $funcionario->getCpf(), $funcionario->getEmail(), $funcionario->getSenha()]);
+                $this->pdo->commit();
+                return true;
+            } catch (\PDOException $e) {
+                $this->pdo->rollBack();
+                throw new FuncionarioException('Falha ao cadastrar funcionario: ' . $e->getMessage());
+            }
         }
+        return false;
 	}
 
 
