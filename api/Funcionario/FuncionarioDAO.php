@@ -21,12 +21,10 @@ class FuncionarioDAO implements RepositorioFuncionarioDAO{
         try {
             $ps = $this->pdo->prepare('SELECT * FROM funcionarios WHERE cpf = ?');
             $ps->execute([$funcionario->getCpf()]);
-            if($ps->fetch()){
-                return false;
-            }
-            return true;
+            return $ps->fetch(PDO::FETCH_ASSOC) ? false : true;
+
         } catch (\PDOException $e) {
-            throw new FuncionarioException('Falha ao listar funcionario: ' . $e->getMessage());
+            throw new FuncionarioException($e->getMessage());
         }
     }
 

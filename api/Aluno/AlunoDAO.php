@@ -4,6 +4,9 @@ require_once('RepositorioAlunoDAO.php');
 require_once('../Exception/AlunoException.php');
 
 
+/**
+ * Summary of AlunoDAO
+ */
 class AlunoDAO implements RepositorioAlunoDAO{
 
     private $pdo;
@@ -30,6 +33,38 @@ class AlunoDAO implements RepositorioAlunoDAO{
             throw new AlunoException('Falha ao listar alunos: ' . $e->getMessage());
         }
 	}
+
+    /**
+     * Summary of validarAlunoCPF
+     * @param Aluno $aluno
+     * @throws AlunoException
+     * @return bool
+     */
+    public function validarAlunoCPF(Aluno $aluno): bool{
+        try {
+            $ps = $this->pdo->prepare('SELECT * FROM alunos WHERE cpf = ?');
+            $ps->execute([$aluno->getCpf()]);
+            return $ps->fetch(PDO::FETCH_ASSOC) ? false : true;
+        } catch (\PDOException $e) {
+            throw new AlunoException($e->getMessage());
+        }
+    }
+
+    /**
+     * Summary of validarAlunoMatricula
+     * @param Aluno $aluno
+     * @throws AlunoException
+     * @return bool
+     */
+    public function validarAlunoMatricula(Aluno $aluno): bool{
+        try {
+            $ps = $this->pdo->prepare('SELECT * FROM alunos WHERE matricula = ?');
+            $ps->execute([$aluno->getMatricula()]);
+            return $ps->fetch(PDO::FETCH_ASSOC) ? false : true;
+        } catch (\PDOException $e) {
+            throw new AlunoException($e->getMessage());
+        }
+    }
 
  /**
   * Summary of cadastrarAluno
