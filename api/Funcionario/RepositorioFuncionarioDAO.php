@@ -12,6 +12,8 @@ interface RepositorioFuncionarioDAO{
      */
     public function listarFuncionarios(): array;
 
+    public function validarFuncionario(Funcionario $funcionario): bool;
+
     public function cadastrarFuncionario(Funcionario $funcionario): bool;
 
     public function removerFuncionario($id): bool;

@@ -17,7 +17,13 @@ class FuncionarioDAO implements RepositorioFuncionarioDAO{
         $this->pdo = $pdo;
     }
 
-    public function validarFuncionario(Funcionario $funcionario){
+    /**
+     * Summary of validarFuncionario
+     * @param Funcionario $funcionario
+     * @throws FuncionarioException
+     * @return bool
+     */
+    public function validarFuncionario(Funcionario $funcionario): bool{
         try {
             $ps = $this->pdo->prepare('SELECT * FROM funcionarios WHERE cpf = ?');
             $ps->execute([$funcionario->getCpf()]);
