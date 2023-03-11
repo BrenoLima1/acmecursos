@@ -19,21 +19,6 @@ class AlunoDAO implements RepositorioAlunoDAO{
         $this->pdo = $pdo;
     }
 
-     /**
-  * Summary of listarAlunos
-  * @throws AlunoException
-  * @return array
-  */
-	public function listarAlunos(): array {
-        try {
-            $ps = $this->pdo->query('SELECT * FROM alunos');
-            return $ps->fetchAll();
-        } catch (\PDOException $e) {
-            $this->pdo->rollBack();
-            throw new AlunoException('Falha ao listar alunos: ' . $e->getMessage());
-        }
-	}
-
     /**
      * Summary of validarAlunoCPF
      * @param Aluno $aluno
@@ -49,6 +34,21 @@ class AlunoDAO implements RepositorioAlunoDAO{
             throw new AlunoException($e->getMessage());
         }
     }
+
+     /**
+  * Summary of listarAlunos
+  * @throws AlunoException
+  * @return array
+  */
+	public function listarAlunos(): array {
+        try {
+            $ps = $this->pdo->query('SELECT * FROM alunos');
+            return $ps->fetchAll();
+        } catch (\PDOException $e) {
+            $this->pdo->rollBack();
+            throw new AlunoException('Falha ao listar alunos: ' . $e->getMessage());
+        }
+	}
 
     /**
      * Summary of validarAlunoMatricula

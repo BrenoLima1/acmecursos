@@ -23,14 +23,31 @@ class FuncionarioDAO implements RepositorioFuncionarioDAO{
      * @throws FuncionarioException
      * @return bool
      */
-    public function validarFuncionario(Funcionario $funcionario): bool{
+    public function validarFuncionarioCPF(Funcionario $funcionario): bool{
         try {
-            $ps = $this->pdo->prepare('SELECT * FROM funcionarios WHERE cpf = ?');
+            $ps = $this->pdo->prepare('SELECT cpf FROM funcionarios WHERE cpf = ?');
             $ps->execute([$funcionario->getCpf()]);
             return $ps->fetch(PDO::FETCH_ASSOC) ? false : true;
 
         } catch (\PDOException $e) {
-            throw new FuncionarioException($e->getMessage());
+            throw new FuncionarioException('CPF já cadastrado: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Summary of validarFuncionarioEmail
+     * @param Funcionario $funcionario
+     * @throws FuncionarioException
+     * @return bool
+     */
+    public function validarFuncionarioEmail(Funcionario $funcionario): bool
+    {
+        try {
+            $ps = $this->pdo->prepare('SELECT email FROM funcionario WHERE email = ?');
+            $ps->execute([$funcionario->getEmail()]);
+            return $ps->fetch(PDO::FETCH_ASSOC) ? false : true;
+        } catch (\PDOException $e) {
+            throw new FuncionarioException('Email já cadastrado: '  . $e->getMessage());
         }
     }
 
@@ -56,7 +73,7 @@ class FuncionarioDAO implements RepositorioFuncionarioDAO{
   * @return bool
   */
 	public function cadastrarFuncionario(Funcionario $funcionario): bool {
-        if($this->validarFuncionario($funcionario)){
+        if($this->validarFuncionarioCPF($funcionario) && $this->validarFuncionarioEmail($funcionario)){
             try {
                 $this->pdo->beginTransaction();
                 $ps = $this->pdo->prepare('INSERT INTO funcionarios(nome, cpf, email, senha) (?,?,?,?)');

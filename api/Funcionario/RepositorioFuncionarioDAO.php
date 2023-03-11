@@ -12,7 +12,14 @@ interface RepositorioFuncionarioDAO{
      */
     public function listarFuncionarios(): array;
 
-    public function validarFuncionario(Funcionario $funcionario): bool;
+    /**
+     * Summary of validarFuncionarioCPF
+     * @param Funcionario $funcionario
+     * @return bool
+     */
+    public function validarFuncionarioCPF(Funcionario $funcionario): bool;
+
+    public function validarFuncionarioEmail(Funcionario $funcionario): bool;
 
     public function cadastrarFuncionario(Funcionario $funcionario): bool;
 
