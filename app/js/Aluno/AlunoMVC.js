@@ -18,7 +18,7 @@ async function buscarAlunos(){
     })
 }
 
-async function cadastrarAluno(aluno) {
+async function cadastrarAluno() {
     const matricula = document.getElementById('matricula').value;
     const nome = document.getElementById('nome').value;
     const cpf = document.getElementById('cpf').value;
