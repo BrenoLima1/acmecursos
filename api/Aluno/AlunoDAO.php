@@ -74,11 +74,14 @@ class AlunoDAO implements RepositorioAlunoDAO{
   */
 	public function cadastrarAluno(Aluno $aluno): bool {
         try {
-            $this->pdo->beginTransaction();
-            $ps = $this->pdo->prepare('INSERT INTO alunos(matricula, nome, cpf, telefone, email) (?,?,?,?,?)');
-            $ps->execute([$aluno->getMatricula(), $aluno->getNome(), $aluno->getCpf(), $aluno->getTelefone(), $aluno->getEmail()]);
-            $this->pdo->commit();
-            return true;
+            if($this->validarAlunoCPF($aluno) && $this->validarAlunoMatricula($aluno)){
+                $this->pdo->beginTransaction();
+                $ps = $this->pdo->prepare('INSERT INTO alunos(matricula, nome, cpf, telefone, email) (?,?,?,?,?)');
+                $ps->execute([$aluno->getMatricula(), $aluno->getNome(), $aluno->getCpf(), $aluno->getTelefone(), $aluno->getEmail()]);
+                $this->pdo->commit();
+                return true;
+            }
+            return false;
         } catch (\PDOException $e) {
             $this->pdo->rollBack();
             throw new AlunoException('Falha ao cadastrar aluno: ' . $e->getMessage());

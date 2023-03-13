@@ -2,21 +2,21 @@ use acmecursos;
 
 create table funcionarios(id int not null auto_increment primary key,
 						  nome varchar(255) not null,
-                          cpf int(11) not null,
-                          email varchar(255) not null,
+                          cpf int(11) not null UNIQUE,
+                          email varchar(255) not null UNIQUE,
                           senha varchar(255) not null)engine=InnoDB;
 
 
 create table alunos(id int not null auto_increment primary key,
-				matricula int(6) not null,
+				matricula int(6) not null UNIQUE,
                 nome varchar(255) not null,
-                cpf int(11) not null,
+                cpf int(11) not null UNIQUE,
                 telefone int(15) not null,
                 email varchar(255) not null)engine=InnoDB;
 
 create table cursos(id int not null auto_increment primary key,
-					codigo varchar(5) not null,
-                    nome varchar(100) not null,
+					codigo varchar(5) not null UNIQUE,
+                    nome varchar(100) not null UNIQUE,
                     situacao varchar(12) not null,
                     data_inicio date not null,
                     data_termino date not null,

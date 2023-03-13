@@ -1,4 +1,4 @@
-class Aluno {
+export class Aluno {
     constructor(matricula, nome, cpf, telefone, email) {
       this.matricula = matricula;
       this.nome = nome;
